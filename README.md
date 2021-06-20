@@ -29,14 +29,13 @@ Last login: Sun Jun 20 18:43:33 2021 from 188.0.139.194
 
 ```
 Далее подключаю второй host к истансам внутренней сети
+```
 Damir@Damir:~$ eval "$(ssh-agent -s)"
 Agent pid 24762
 damir@Damir:~$ ssh-add -L
 The agent has no identities.
 damir@Damir:~$ ssh-add ~/.ssh/zagretdinov
 Identity added: /home/damir/.ssh/zagretdinov (zagretdinov)
-
-```
 zagretdinov@bastion:~$ ssh 10.128.0.14
 The authenticity of host '10.128.0.14 (10.128.0.14)' can't be established.
 ECDSA key fingerprint is SHA256:2E8YmHoGKeoSEHqvvTYdka9D+LLhML0mMXy86EtEcVk.
@@ -59,6 +58,7 @@ zagretdinov@someinternal:~$
 
 ```
 В бастионе нет ничего лишнего.
+```
 zagretdinov@bastion:~$ ls -la ~/.ssh/
 total 16
 drwx------ 2 zagretdinov zagretdinov 4096 Jun 20 18:44 .
@@ -69,6 +69,7 @@ zagretdinov@bastion:~$
 Получается Хосты
 someinternal - 178.154.254.210
 someinternal - 10.128.0.14
+```
 
 ## Самостоятельное задание. Исследовать способ подключения к someinternalhost в одну команду из вашего рабочего устройства:
 
