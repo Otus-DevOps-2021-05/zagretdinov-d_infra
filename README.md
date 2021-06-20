@@ -170,7 +170,10 @@ sudo pritunl default-password
 добавляю сервер и организацию и включаю в организацию пользователя и сервер.
 Файл настройки клиента VPN (пользователь = test) - cloud-bostion.ovpn
 небольшой процесс подключения с моего ПК 
+
 ![изображение](https://user-images.githubusercontent.com/85208391/122690968-6c3ab180-d24e-11eb-891b-55fe3724da99.png)
+
+
 ![изображение](https://user-images.githubusercontent.com/85208391/122691014-cfc4df00-d24e-11eb-9324-0c73f3a8d596.png)
 
 
