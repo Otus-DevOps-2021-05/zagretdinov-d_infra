@@ -67,8 +67,8 @@ drwxr-xr-x 4 zagretdinov zagretdinov 4096 Jun 20 18:41 ..
 -rw-r--r-- 1 zagretdinov zagretdinov  444 Jun 20 18:53 known_hosts
 zagretdinov@bastion:~$ 
 Получается Хосты
-someinternal - 178.154.254.210
-someinternal - 10.128.0.14
+bastion_IP - 178.154.254.210
+someinternal_IP - 10.128.0.14
 ```
 
 ## Самостоятельное задание. Исследовать способ подключения к someinternalhost в одну команду из вашего рабочего устройства:
@@ -124,7 +124,7 @@ Host someinternal
   IdentityFile /home/damir/.ssh/zagretdinov
 
 ```
-и проверочка как нестранно оно работает
+и проверочка как ни странно оно работает
 
 ```
 amir@Damir:~$ ssh someinternal
@@ -143,3 +143,34 @@ Last login: Sun Jun 20 19:36:17 2021 from 10.128.0.5
 zagretdinov@someinternal:~$
 
 ```
+## VPN-сервер для серверов Yandex.Cloud
+С готового скрипта установил mongodb и VPN-cервер pritunl проверяю статус. 
+``` 
+sudo bash setupvpn.sh
+zagretdinov@bastion:~$ systemctl status mongod.service
+● mongod.service - MongoDB Database Server
+     Loaded: loaded (/lib/systemd/system/mongod.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2021-06-20 20:48:35 UTC; 4min 42s ago
+       Docs: https://docs.mongodb.org/manual
+   Main PID: 25676 (mongod)
+     Memory: 89.9M
+     CGroup: /system.slice/mongod.service
+             └─25676 /usr/bin/mongod --config /etc/mongod.conf
+
+```
+сгенерирую установочный ключ zagretdinov@bastion:~$ 
+```
+sudo pritunl setup-key
+```
+и получаю логин и пароль
+```
+sudo pritunl default-password
+```
+После настройки создаем пользователя test с PIN 6214157507237678334670591556762, 
+добавляю сервер и организацию и включаю в организацию пользователя и сервер.
+Файл настройки клиента VPN (пользователь = test) - cloud-bostion.ovpn
+![изображение](https://user-images.githubusercontent.com/85208391/122690968-6c3ab180-d24e-11eb-891b-55fe3724da99.png)
+
+
+
+
