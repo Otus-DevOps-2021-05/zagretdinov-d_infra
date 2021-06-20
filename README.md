@@ -169,7 +169,37 @@ sudo pritunl default-password
 После настройки создаем пользователя test с PIN 6214157507237678334670591556762, 
 добавляю сервер и организацию и включаю в организацию пользователя и сервер.
 Файл настройки клиента VPN (пользователь = test) - cloud-bostion.ovpn
+небольшой процесс подключения с моего ПК 
 ![изображение](https://user-images.githubusercontent.com/85208391/122690968-6c3ab180-d24e-11eb-891b-55fe3724da99.png)
+![изображение](https://user-images.githubusercontent.com/85208391/122691014-cfc4df00-d24e-11eb-9324-0c73f3a8d596.png)
+
+
+Проверяю возможность подключения к someinternalhost
+```
+damir@Damir:~$ ssh -i ~/.ssh/zagretdinov zagretdinov@10.128.0.14
+Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-42-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+Last login: Sun Jun 20 23:12:20 2021 from 10.128.0.5
+```
+Работает!
+Ну и в принципе можно проверить на самом сервере что тунель создан.
+![изображение](https://user-images.githubusercontent.com/85208391/122691342-e4a27200-d250-11eb-8b62-8a89153706c2.png)
+
+## Дополнительное задание
+178.154.254.210.sslip.io прописываю в настройка Pritunl в домене.
+
+Доступ к Pritunl - https://178.154.254.210.sslip.io
+
+![изображение](https://user-images.githubusercontent.com/85208391/122691465-a5c0ec00-d251-11eb-87a7-fb9781b3c214.png)
+
+
+
+
 
 
 
