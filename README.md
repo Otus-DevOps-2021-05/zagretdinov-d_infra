@@ -190,7 +190,8 @@ Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your 
 Last login: Sun Jun 20 23:12:20 2021 from 10.128.0.5
 ```
 Работает!
-Ну и в принципе можно проверить на самом сервере что тунель создан.
+Ну и в принципе можно проверить на самом сервере что тунель поднят.
+
 ![изображение](https://user-images.githubusercontent.com/85208391/122691342-e4a27200-d250-11eb-8b62-8a89153706c2.png)
 
 ## Дополнительное задание
