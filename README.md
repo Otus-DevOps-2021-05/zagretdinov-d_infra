@@ -19,7 +19,7 @@ zagretdinov-d Infra repository
 Генерю пару ключи ssh-keygen -t rsa -f ~/.ssh/zagretdinov -C zagretdinov -P ""
 Подключаюсь
 ```
-damir@Damir:~$ ssh -i ~/.ssh/zagretdinov -A zagretdinov@178.154.254.210
+damir@Damir:~$ ssh -i ~/.ssh/zagretdinov -A zagretdinov@84.201.158.166
 Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-42-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
