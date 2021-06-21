@@ -67,7 +67,7 @@ drwxr-xr-x 4 zagretdinov zagretdinov 4096 Jun 20 18:41 ..
 -rw-r--r-- 1 zagretdinov zagretdinov  444 Jun 20 18:53 known_hosts
 zagretdinov@bastion:~$ 
 Получается Хосты
-bastion_IP - 178.154.254.210
+bastion_IP - 84.201.158.166
 someinternal_IP - 10.128.0.14
 ```
 
@@ -76,12 +76,12 @@ someinternal_IP - 10.128.0.14
 
 Добавляю на свою локальную машину в ~/.ssh/config cкрипт с содержимым:
 ```
-Host 178.154.254.210
+Host 84.201.158.166
   User zagretdinov
   IdentityFile /home/damir/.ssh/zagretdinov
 Host 10.128.0.14
   User zagretdinov
-  ProxyCommand ssh -W %h:%p 178.154.254.210
+  ProxyCommand ssh -W %h:%p 84.201.158.166
   IdentityFile /home/damir/.ssh/zagretdinov
 
 ```
@@ -114,13 +114,13 @@ zagretdinov@someinternal:~$
 
 и в ~/.ssh/config меняю:
 ```
-Host 178.154.254.210
+Host 84.201.158.166
   User zagretdinov
   IdentityFile /home/damir/.ssh/zagretdinov
 #Host 10.128.0.14
 Host someinternal
   User zagretdinov
-  ProxyCommand ssh -W %h:%p 178.154.254.210
+  ProxyCommand ssh -W %h:%p 84.201.158.166
   IdentityFile /home/damir/.ssh/zagretdinov
 
 ```
@@ -195,9 +195,9 @@ Last login: Sun Jun 20 23:12:20 2021 from 10.128.0.5
 ![изображение](https://user-images.githubusercontent.com/85208391/122691342-e4a27200-d250-11eb-8b62-8a89153706c2.png)
 
 ## Дополнительное задание
-178.154.254.210.sslip.io прописываю в настройка Pritunl в домене.
+84.201.158.166.sslip.io прописываю в настройка Pritunl в домене.
 
-Доступ к Pritunl - https://178.154.254.210.sslip.io
+Доступ к Pritunl - https://84.201.158.166.sslip.io
 
 ![изображение](https://user-images.githubusercontent.com/85208391/122691465-a5c0ec00-d251-11eb-87a7-fb9781b3c214.png)
 
