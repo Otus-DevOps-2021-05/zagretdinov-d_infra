@@ -1,4 +1,3 @@
-cat <<EOF> setupvpn.sh
 #!/bin/bash
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" > /etc/apt/sources.list.d/mongodb-org-4.4.list
 echo "deb http://repo.pritunl.com/stable/apt focal main" > /etc/apt/sources.list.d/pritunl.list
@@ -10,4 +9,3 @@ apt-get --assume-yes upgrade
 apt-get --assume-yes install pritunl mongodb-org
 systemctl start pritunl mongod
 systemctl enable pritunl mongod
-EOF
