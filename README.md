@@ -159,6 +159,7 @@ zagretdinov@bastion:~$ systemctl status mongod.service
 
 ```
 сгенерирую установочный ключ zagretdinov@bastion:~$ 
+
 ```
 sudo pritunl setup-key
 ```
