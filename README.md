@@ -104,7 +104,7 @@ Last login: Sun Jun 20 18:53:13 2021 from 10.128.0.5
 zagretdinov@someinternal:~$
 
 ```
-## Дополнительное задание:
+## Стандартное задание:
 
 На локальной машине в /etc/hosts добавляю запись
 ```
@@ -124,10 +124,10 @@ Host someinternal
   IdentityFile /home/damir/.ssh/zagretdinov
 
 ```
-и проверочка как ни странно оно работает
+Проверяю
 
 ```
-amir@Damir:~$ ssh someinternal
+damir@Damir:~$ ssh someinternal
 The authenticity of host 'someinternal (<no hostip for proxy command>)' can't be established.
 ECDSA key fingerprint is SHA256:2E8YmHoGKeoSEHqvvTYdka9D+LLhML0mMXy86EtEcVk.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
@@ -195,6 +195,18 @@ Last login: Sun Jun 20 23:12:20 2021 from 10.128.0.5
 
 ![изображение](https://user-images.githubusercontent.com/85208391/122691342-e4a27200-d250-11eb-8b62-8a89153706c2.png)
 
+![изображение](https://user-images.githubusercontent.com/85208391/122694207-782e6f80-d25e-11eb-9e37-4fef8593c104.png)
+
+
+## Указываю адреса инстанции полученные входе конфигурации:
+
+```
+bastion_IP = 84.201.158.166
+someinternalhost_IP = 10.128.0.14
+```
+Добавляю "Labels" cloud-bastion
+![изображение](https://user-images.githubusercontent.com/85208391/122870796-f585dd00-d34f-11eb-874e-f4ecfe30cd72.png)
+
 ## Дополнительное задание
 84.201.158.166.sslip.io прописываю в настройка Pritunl в домене.
 
@@ -203,7 +215,7 @@ Last login: Sun Jun 20 23:12:20 2021 from 10.128.0.5
 ![изображение](https://user-images.githubusercontent.com/85208391/122691465-a5c0ec00-d251-11eb-87a7-fb9781b3c214.png)
 
 
-![изображение](https://user-images.githubusercontent.com/85208391/122694207-782e6f80-d25e-11eb-9e37-4fef8593c104.png)
+
 
 
 
