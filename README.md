@@ -204,7 +204,8 @@ Last login: Sun Jun 20 23:12:20 2021 from 10.128.0.5
 bastion_IP = 84.201.158.166
 someinternalhost_IP = 10.128.0.14
 ```
-Добавляю "Labels" cloud-bastion
+##Добавляю "Labels" cloud-bastion
+
 ![изображение](https://user-images.githubusercontent.com/85208391/122870796-f585dd00-d34f-11eb-874e-f4ecfe30cd72.png)
 
 ## Дополнительное задание
