@@ -14,10 +14,10 @@ zagretdinov-d Infra repository
 подключения в следующем формате (важно для проверки!):
 
 ## Полученные данные входе создания VM 
-`
-## bastion_IP = 84.201.158.166
-## someinternalhost_IP = 10.128.0.14
-`
+
+bastion_IP = 84.201.158.166
+someinternalhost_IP = 10.128.0.14
+
 ## Процесс выполнения:
 Создаю инстансы VM bastion и someinternal
 
