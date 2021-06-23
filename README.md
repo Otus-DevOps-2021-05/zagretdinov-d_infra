@@ -6,5 +6,5 @@ zagretdinov-d Infra repository
 bastion_IP = 84.201.158.166
 someinternalhost_IP = 10.128.0.14
 
-testapp_IP = 84.201.158.166
+testapp_IP = 178.154.203.133
 testapp_port = 9292
