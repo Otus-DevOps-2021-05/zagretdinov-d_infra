@@ -8,7 +8,6 @@ apt-get update
 # установка mongodb
 apt-get install -y mongodb-org
 # добавления в автозапуск
-# старт mongodb
 systemctl enable mongod
 # старт mongodb
 systemctl start mongod
