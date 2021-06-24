@@ -17,7 +17,9 @@ testapp_port = 9292
 ![изображение](https://user-images.githubusercontent.com/85208391/123184931-9ee6e300-d4b6-11eb-950d-e50a2927ec07.png)
 
 подключаюсь
+
 ![изображение](https://user-images.githubusercontent.com/85208391/123184996-c50c8300-d4b6-11eb-91cd-6d64eae24add.png)
+
 я подключился под тем пользователем что создал в id-app.yaml
 
 проверяю работу приложения
