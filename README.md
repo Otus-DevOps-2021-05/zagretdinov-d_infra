@@ -1,7 +1,7 @@
 # zagretdinov-d_infra
 zagretdinov-d Infra repository
 
-## IP адреса для подключения к bastion и someinternalhost
+## IP адреса
 
 bastion_IP = 84.201.158.166
 someinternalhost_IP = 10.128.0.14
