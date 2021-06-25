@@ -26,6 +26,6 @@ testapp_port = 9292
 
 ![изображение](https://user-images.githubusercontent.com/85208391/123185169-19affe00-d4b7-11eb-8348-565310f477fa.png)
 
-http://130.193.37.7:9292/
+http://178.154.227.200:9292/
 
 ![изображение](https://user-images.githubusercontent.com/85208391/123185334-81664900-d4b7-11eb-884c-e579a76f59ae.png)
