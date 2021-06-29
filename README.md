@@ -50,7 +50,7 @@ yc iam key create --service-account-id $ACCT_ID --output <вставьтесво
 "subnet_id": "{{user `subnet_id`}}",
 "use_ipv4_nat": true,
 ```
-Для скрипта install_ruby.sh при обновлении необходима пауза, так как процесс обновления еще не закончен, а уже выполняется установка. для этого я
+Для скрипта install_ruby.sh при обновлении необходима пауза, так как процесс обновления еще не закончен, а уже выполняется установка. Для этого я добавил в скрипт:
 
 ```
 echo "Sleep 30 sec for apt update"; sleep 30s; echo "start apt install"
@@ -63,7 +63,7 @@ echo "Sleep 30 sec for apt update"; sleep 30s; echo "start apt install"
 
 Закончил.
 
-Проверяю образ сосздаю ВМ:
+Проверяю образ и создаю ВМ:
 
 ![image](https://user-images.githubusercontent.com/85208391/123780085-a2360080-d8f4-11eb-8fc7-ffc98e5c8699.png)
 
