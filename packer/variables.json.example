@@ -1,6 +1,5 @@
 {
-  "key_file": "key",
+  "key_file": "key.json.example",
   "folder_id": "idfolder",
-  "subnet_id": "idsubnet" 
+  "subnet_id": "idsubnet"
 }
-
