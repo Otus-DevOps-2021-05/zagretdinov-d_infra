@@ -94,9 +94,18 @@ Cоздал variables.json, .gitignore файлы и для коммита в р
 ![image](https://user-images.githubusercontent.com/85208391/123781583-3b194b80-d8f6-11eb-8ac1-a991a9e2da9c.png)
 
 
+## Автоматизация создания ВМ
 
-
-
+!/bin/bash
+IMAGE_ID=$(yc compute image list | grep reddit-full | awk '{print $2}')
+yc compute instance create \
+	--name reddit-app \
+	--hostname reddit-app \
+	--memory=2  \
+	--create-boot-disk name=reddit-full,image-id=$IMAGE_ID,size=10GB \
+  --network-interface subnet-name=my-net-ru-central1-a,nat-ip-version=ipv4 \
+	--metadata serial-port-enable=1 \
+	--ssh-key ~/.ssh/zagretdinov.pub
 
 
 
