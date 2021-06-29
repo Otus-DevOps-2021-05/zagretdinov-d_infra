@@ -5,6 +5,6 @@ yc compute instance create \
 	--hostname reddit-app \
 	--memory=2  \
 	--create-boot-disk name=reddit-full,image-id=$IMAGE_ID,size=10GB \
-  --network-interface subnet-name=my-net-ru-central1-a,nat-ip-version=ipv4 \
+        --network-interface subnet-name=my-net-ru-central1-a,nat-ip-version=ipv4 \
 	--metadata serial-port-enable=1 \
 	--ssh-key ~/.ssh/zagretdinov.pub
