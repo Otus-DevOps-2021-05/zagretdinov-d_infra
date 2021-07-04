@@ -1,6 +1,11 @@
 # zagretdinov-d_infra
 zagretdinov-d Infra repository
 
+## Домашнее задание
+
+## Декларативное описание в виде кода инфраструктуры YC, требуемой для запуска тестового приложения, при помощи Terraform.
+
+
 ## Установка Terraform
 Скаченная версия перемещена в папку bin.
 
@@ -8,13 +13,13 @@ zagretdinov-d Infra repository
 
 ![изображение](https://user-images.githubusercontent.com/85208391/124372699-16cebd80-dcae-11eb-8edc-2e645151a89f.png)
 
-Создаю новую ветку git checkout -b terraform - 1
+Создаю новую ветку ``` git checkout -b terraform - 1 ```
 
 В корне репозитория создаю файл с содержимым
 
 ![изображение](https://user-images.githubusercontent.com/85208391/124372768-b12f0100-dcae-11eb-8006-9c79e71351af.png)
 
-создайте пустой файл: main.tf
+создаю пустой файл: main.tf
 
 ![изображение](https://user-images.githubusercontent.com/85208391/124372773-c146e080-dcae-11eb-95c7-ee664bd74828.png)
 
