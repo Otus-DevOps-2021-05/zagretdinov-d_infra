@@ -19,9 +19,11 @@ zagretdinov-d Infra repository
 
 ![изображение](https://user-images.githubusercontent.com/85208391/124372768-b12f0100-dcae-11eb-8006-9c79e71351af.png)
 
-создаю пустой файл: main.tf
+создаю главный конфигурационныйфайл файл: main.tf
+определяю  секцию  Provider, ресурсы и интерфейс.
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372773-c146e080-dcae-11eb-95c7-ee664bd74828.png)
+![изображение](https://user-images.githubusercontent.com/85208391/124373323-3caa9100-dcb3-11eb-8954-cf0879ad35ce.png)
+
 
 создаю отдельный service account
 
