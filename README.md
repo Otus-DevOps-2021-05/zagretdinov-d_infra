@@ -151,8 +151,9 @@ http://178.154.228.93:9292/
 ![изображение](https://user-images.githubusercontent.com/85208391/124373237-5f887580-dcb2-11eb-8142-5eb12ad9f097.png)
 
 
+## Самостоятельные задания
 
-
+![изображение](https://user-images.githubusercontent.com/85208391/124374974-358a7f80-dcc1-11eb-92ef-9a1cbe25bd6c.png)
 
 
 
