@@ -25,3 +25,7 @@ variable "public_key_path" {
 variable "private_key_path" {
   description = "Path to the PRIVATE key used for ssh access for connetions"
 }
+variable "region_id" {
+  type    = string
+  default = "ru-central1"
+}
