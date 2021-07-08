@@ -5,9 +5,8 @@ resource "yandex_compute_instance" "app" {
     tags = "reddit-app"
   }
   resources {
-    cores  = var.cores
-    memory = var.memory
-    core_fraction = var.core_fraction
+    cores  = 2
+    memory = 2
   }
 
   boot_disk {
@@ -22,27 +21,6 @@ resource "yandex_compute_instance" "app" {
   }
 
   metadata = {
-  ssh-keys = "ubuntu:${file(var.public_key_path)}"
+    ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
-
-    connection {
-      type        = "ssh"
-      host        = yandex_compute_instance.app[0].network_interface[0].nat_ip_address
-      user        = "ubuntu"
-      agent       = false
-      private_key = file(var.private_key_path)
-    }
-    provisioner "file" {
-        content     = "DATABASE_URL=${var.db_host}:${var.db_port}\n"
-        destination = "/home/ubuntu/db.env"
-      }
-
-      provisioner "file" {
-        source      = "../modules/app/files/puma.service"
-        destination = "/tmp/puma.service"
-      }
-
-    provisioner "remote-exec" {
-      script = "${path.module}/files/deploy.sh"
-    }
 }

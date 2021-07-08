@@ -5,8 +5,8 @@ resource "yandex_compute_instance" "db" {
   }
 
   resources {
-    cores  = var.cores
-    memory = var.memory
+    cores  = 2
+    memory = 2
   }
 
   boot_disk {
@@ -17,7 +17,7 @@ resource "yandex_compute_instance" "db" {
 
   network_interface {
     subnet_id = var.subnet_id
-    nat       = true
+    nat = true
   }
 
   metadata = {

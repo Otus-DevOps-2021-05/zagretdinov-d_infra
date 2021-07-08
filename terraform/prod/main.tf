@@ -1,40 +1,22 @@
 provider "yandex" {
-  service_account_key_file = var.service_account_key_file
-  cloud_id                 = var.yc_cloud_id
-  folder_id                = var.yc_folder_id
-  zone                     = var.yc_zone
+  version   = 0.35
+  token     = var.token
+  cloud_id  = var.cloud_id
+  folder_id = var.folder_id
+  zone      = var.zone
 }
-
 module "vpc" {
-  source       = "../modules/vpc"
-  network_name = "reddit-app-network"
-  subnet_name  = "reddit-app-subnet"
-  zone         = "ru-central1-a"
-  cidr         = "192.168.10.0/24"
+  source          = "../modules/vpc"
 }
-
 module "app" {
-  name            = "reddit-app"
   source          = "../modules/app"
-  ssh_public_key  = var.ssh_public_key
-  ssh_private_key = var.ssh_private_key
-  disk_image      = var.app_disk_image
-  subnet_id       = module.vpc.subnet_id
-  is_nat          = true
-  cores           = 2
-  memory          = 2
-  core_fraction   = 5
-  db_host         = module.db.internal_ip_address_db
-  db_port         = 27017
+  public_key_path = var.public_key_path
+  app_disk_image  = var.app_disk_image
+  subnet_id       = module.vpc.app_subnet_id
 }
-
 module "db" {
-  name           = "reddit-db"
-  source         = "../modules/db"
-  ssh_public_key = var.ssh_public_key
-  disk_image     = var.db_disk_image
-  subnet_id      = module.vpc.subnet_id
-  cores          = 2
-  memory         = 2
-  core_fraction  = 20
+  source          = "../modules/db"
+  public_key_path = var.public_key_path
+  db_disk_image   = var.db_disk_image
+  subnet_id       = module.vpc.app_subnet_id
 }

@@ -1,3 +1,3 @@
-output "subnet_id" {
-  value = yandex_vpc_subnet.subnet.id
+output "app_subnet_id" {
+  value = yandex_vpc_subnet.app-subnet.id
 }
