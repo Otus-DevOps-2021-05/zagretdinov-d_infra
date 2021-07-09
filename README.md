@@ -35,17 +35,24 @@ terraform apply
 
 ## Создадим две VM
 Запечетлил процесс работы скриншотами.
+![изображение](https://user-images.githubusercontent.com/85208391/125016868-df885400-e093-11eb-91a2-9fb521417ec7.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/125016310-f37f8600-e092-11eb-8e1e-0ddd9ccaf31e.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125016884-e8792580-e093-11eb-9c61-9b27c082e0af.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/125016277-e6fb2d80-e092-11eb-8c3a-5489a323fbb5.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125016908-f5961480-e093-11eb-99f9-9b80739dc642.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/125016927-fc248c00-e093-11eb-9dc8-e6bc273067cc.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/125016946-02b30380-e094-11eb-86a9-013b4a7ef464.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/125016973-10688900-e094-11eb-83ff-4f4f194d929e.png)
+
 
 В результате:
 
 ![изображение](https://user-images.githubusercontent.com/85208391/125016450-35103100-e093-11eb-9a45-3894066599fa.png)
 
 ![изображение](https://user-images.githubusercontent.com/85208391/125016557-5d982b00-e093-11eb-8822-01e81eae3860.png)
-
 
 
 
