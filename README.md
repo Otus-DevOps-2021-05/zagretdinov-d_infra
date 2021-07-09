@@ -117,6 +117,56 @@ terraform {
 
 ![изображение](https://user-images.githubusercontent.com/85208391/125023340-84a92980-e0a0-11eb-9d45-cae64998ce90.png)
 
+Настроил хранение state в yandex object storage.
+Скопировал с сервисного аккаунт access key.
+```
+yc iam access-key create --service-account-name SERVICE_ACCOUNT_NAME
+```
+Для инициализации backend указал реквизиты при запуске terraform init
+```
+terraform init -backend-config="access_key=YOUR_ACCESS_KEY" -backend-config="secret_key=YOUR_SECRET_KEY"
+```
+в результате на примере получилось
+
+![изображение](https://user-images.githubusercontent.com/85208391/125023606-0b5e0680-e0a1-11eb-8738-76a59c71f47f.png)
+
+и вот оно появилось.
+
+![изображение](https://user-images.githubusercontent.com/85208391/125023657-20d33080-e0a1-11eb-91d4-1745ebe0c049.png)
+
+## Заданиес**
+
+Добавил необходимые provisioner в модули для деплоя и работы приложения. Файлы, используемые в provisioner, находятся в директории модуля
+
+![изображение](https://user-images.githubusercontent.com/85208391/125023984-bff82800-e0a1-11eb-8e11-b2c129edace3.png)
+
+Один из скриншотом наблюдения как устанавливались приложении и БД.
+
+![изображение](https://user-images.githubusercontent.com/85208391/125024322-56c4e480-e0a2-11eb-9345-282524415d5b.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
