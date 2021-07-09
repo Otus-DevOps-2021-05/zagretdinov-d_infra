@@ -71,7 +71,11 @@ terraform apply
 
 ![изображение](https://user-images.githubusercontent.com/85208391/125022297-2ed38200-e09e-11eb-9f95-1ceec9f342d1.png)
 
+![изображение](https://user-images.githubusercontent.com/85208391/125022560-c8029880-e09e-11eb-96ff-454e289b731f.png)
 
+![изображение](https://user-images.githubusercontent.com/85208391/125022573-d18c0080-e09e-11eb-8ee4-99fa722f3cd0.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/125022677-07c98000-e09f-11eb-9bec-5b9e8045785a.png)
 
 
 
