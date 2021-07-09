@@ -3,194 +3,56 @@ zagretdinov-d Infra repository
 
 ## Домашнее задание
 
-## Декларативное описание в виде кода инфраструктуры YC, требуемой для запуска тестового приложения, при помощи Terraform.
+## Создание Terraform модулей для управления компонентами инфраструктуры.
 
-
-## Установка Terraform
-Скаченная версия перемещена в папку bin.
-
-![изображение](https://user-images.githubusercontent.com/85208391/124372688-03bbed80-dcae-11eb-9fe1-06f1e705c1ee.png)
-
-![изображение](https://user-images.githubusercontent.com/85208391/124372699-16cebd80-dcae-11eb-8edc-2e645151a89f.png)
-
-Создаю новую ветку ``` git checkout -b terraform - 1 ```
-
-В корне репозитория создаю файл с содержимым
-
-![изображение](https://user-images.githubusercontent.com/85208391/124372768-b12f0100-dcae-11eb-8006-9c79e71351af.png)
-
-создаю главный конфигурационныйфайл файл: main.tf
-определяю  секцию  Provider, ресурсы и интерфейс.
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373323-3caa9100-dcb3-11eb-8954-cf0879ad35ce.png)
-
-
-создаю отдельный service account
-
+## Ресурс IP адреса
+Так как создать новую сеть согласна заданию «"yandex_vpc_network" "app-network"» у меня не получится я буду пользватся тем что мне выдали по умолчанию по промокоду. 
+И так первый шаг создания подсети я выполнил ледующим образом.
 ```
-yc config list
-$ SVC_ACCT=""
-$ FOLDER_ID=""
-$ yc iam service-account create --name $SVC_ACCT --folder-id $FOLDER_ID
-$ ACCT_ID=$(yc iam service-account get $SVC_ACCT | \ 
-grep ^id | \ 
-awk '{print $2}')
-$ yc resource-manager folder add-access-binding --id $FOLDER_ID \ 
---role editor \ 
---service-account-id $ACCT_ID
-yc iam key create --service-account-id $ACCT_ID --output <вставьтесвойпуть>/key.jcon
-```
+provider "yandex" {
+service_account_key_file = var.service_account_key_file
+cloud_id = var.cloud_id
+folder_id = var.folder_id
+zone = "ru-central1-a"
+}
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372853-6feb2100-dcaf-11eb-8c77-5b34bdadca81.png)
-
-## Terraform initTerrafo
-
-![изображение](https://user-images.githubusercontent.com/85208391/124372893-af197200-dcaf-11eb-87f0-bb5dcd5494e0.png)
-
-## Ресурсная модель
-В файле main.tf после определения провайдера, добавляю ресурс для создания инстанса VM в YC и проверяю
-```
-terraform init
-terraform plan
+resource "yandex_vpc_subnet" "subnet" {
+  name = "reddit-subnet"
+  zone = "ru.central1-a"
+  network_id = var.network.id
+  v4_cidr_blocks = [var.cidr]
+}
 terraform apply
 ```
+![изображение](https://user-images.githubusercontent.com/85208391/125015984-62101400-e092-11eb-9d73-aa4fa2b154db.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372926-0cadbe80-dcb0-11eb-9622-47e8a49f3f95.png)
 
+## Несколько VM
 
-VM создана успешна.
+![изображение](https://user-images.githubusercontent.com/85208391/125016116-997ec080-e092-11eb-9e25-b0960560e4f4.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372936-1afbda80-dcb0-11eb-9f14-8934df1db85e.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125016162-adc2bd80-e092-11eb-8160-6b6a22270414.png)
 
+## Создадим две VM
+Запечетлил процесс работы скриншотами.
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372938-1fc08e80-dcb0-11eb-8aae-d8cd481b2bbb.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125016310-f37f8600-e092-11eb-8e1e-0ddd9ccaf31e.png)
 
-## terraform show
-```
-terraform show | grep nat_ip_address
-nat_ip_address     = "178.154.229.124"
-```
+![изображение](https://user-images.githubusercontent.com/85208391/125016277-e6fb2d80-e092-11eb-8c3a-5489a323fbb5.png)
 
-Добавим SSH ключ для пользователя ubuntu
+![изображение](https://user-images.githubusercontent.com/85208391/125016249-d77be480-e092-11eb-8b6b-ad24f13994ff.png)
 
-подключаемся
-ssh ubuntu@178.154.229.124
+![изображение](https://user-images.githubusercontent.com/85208391/125016327-fda18480-e092-11eb-8152-9de28739c289.png)
 
+![изображение](https://user-images.githubusercontent.com/85208391/125016347-07c38300-e093-11eb-95af-932033002391.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372958-441c6b00-dcb0-11eb-864b-6d79ab303882.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125016367-11e58180-e093-11eb-92e1-b696d7b435f2.png)
 
-подключение успешно.
+В результате:
 
-## Output vars
+![изображение](https://user-images.githubusercontent.com/85208391/125016450-35103100-e093-11eb-9a45-3894066599fa.png)
 
-создаю отдельный файлик с конфигурациями, с названием outputs.tf
-
-![изображение](https://user-images.githubusercontent.com/85208391/124372983-7928bd80-dcb0-11eb-8a2a-a5e6b6934f61.png)
-
-
-Используя следующие команды можно просмотреть выходнык переменные
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373045-ffdd9a80-dcb0-11eb-9fef-724216297bef.png)
-
-
-## Добавляю provisioners
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373058-197ee200-dcb1-11eb-8a86-677f20d71c58.png)
-
-создаю файлы с содержимым в папке files
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373064-27ccfe00-dcb1-11eb-879b-9050ffa8360b.png)
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373066-2bf91b80-dcb1-11eb-9f54-d73c629f767a.png)
-
-
-## Параметр подключение provisioners
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373083-46cb9000-dcb1-11eb-9103-d8a2f2102382.png)
-
-## Проверяем работу провижинеровПроверяем работу провижи
-
-```
-terraform taint yandex_compute_instance.app[0]
-Resource instance yandex_compute_instance.app[0] has been marked as tainted.
-terraform plan
-terraform apply
-```
-
-Проверяю работу приложения
-
-external_ip_address_app = 84.201.129.118
-
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373105-6c589980-dcb1-11eb-90e0-1cfa284634ba.png)
-
-
-## Input vars
-Для использования входных переменных создаю следующие конфигурационные файлы.
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373155-a0cc5580-dcb1-11eb-9cf5-6478907a19ac.png)
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373158-a75acd00-dcb1-11eb-97af-245c82373730.png)
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373160-aaee5400-dcb1-11eb-9b3a-94164e2961c6.png)
-
-## Финальная проверка
-
-Пересоздаю все ресурсы 
-```
-terraform destroy
-terraform plan
-terraform apply
-```
-![изображение](https://user-images.githubusercontent.com/85208391/124373213-25b76f00-dcb2-11eb-9926-0d5de6caf110.png)
-
-external_ip_address_app = 178.154.228.93
-
-http://178.154.228.93:9292/
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373237-5f887580-dcb2-11eb-8142-5eb12ad9f097.png)
-
-
-## Самостоятельные задания
-Создал файл lb.tf и описал в нем в коде terraform создание HTTP балансировщика, направляющего трафик на нашеразвернутое приложение на инстансе reddit-app.  Добави в output переменные адрес балансировщика
-
-![изображение](https://user-images.githubusercontent.com/85208391/124374974-358a7f80-dcc1-11eb-92ef-9a1cbe25bd6c.png)
-
-![изображение](https://user-images.githubusercontent.com/85208391/124375936-6620e800-dcc6-11eb-9738-562720d2b93e.png)
-
-
-Проверил доступность приложения по адресу балансировщика.
-
-![изображение](https://user-images.githubusercontent.com/85208391/124375947-75a03100-dcc6-11eb-8235-76a982c99551.png)
-
-Это адресс является
-
-external_ip_address_lb = 178.154.227.41
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![изображение](https://user-images.githubusercontent.com/85208391/125016557-5d982b00-e093-11eb-8822-01e81eae3860.png)
 
 
 
