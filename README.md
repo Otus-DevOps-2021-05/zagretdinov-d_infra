@@ -54,6 +54,39 @@ terraform apply
 
 ![изображение](https://user-images.githubusercontent.com/85208391/125016557-5d982b00-e093-11eb-8822-01e81eae3860.png)
 
+## Создания модулей
+Так же демонстрация скриншотами.
+
+![изображение](https://user-images.githubusercontent.com/85208391/125019626-2fb5e500-e099-11eb-8030-3267aa7f9b01.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/125019761-5ffd8380-e099-11eb-8f9d-6bae1767cc60.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
