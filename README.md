@@ -75,18 +75,47 @@ terraform apply
 
 ![изображение](https://user-images.githubusercontent.com/85208391/125022573-d18c0080-e09e-11eb-8ee4-99fa722f3cd0.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/125022677-07c98000-e09f-11eb-9bec-5b9e8045785a.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125022862-70186180-e09f-11eb-8c03-3c7915579fac.png)
 
+успешно установилось и работает.
 
+![изображение](https://user-images.githubusercontent.com/85208391/125022901-858d8b80-e09f-11eb-8884-49c390921add.png)
 
+![изображение](https://user-images.githubusercontent.com/85208391/125022925-8faf8a00-e09f-11eb-86c7-f64e944e8564.png)
 
+## Создание Stage & Prod
 
+![изображение](https://user-images.githubusercontent.com/85208391/125023039-dc936080-e09f-11eb-9f14-7672451f7b4d.png)
 
+Идентично скопировал. Все работает.
 
+![изображение](https://user-images.githubusercontent.com/85208391/125023138-0ba9d200-e0a0-11eb-9b07-40858a892ace.png)
 
+Удалил из папки terraform файлы main.tf, outputs.tf, terraform.tfvars, variables.tf, так как они теперь перенесены в stage и prod
 
+## Задание со звездой.
+В ообщем создал файл backend.tf в двух директориях.
 
+![изображение](https://user-images.githubusercontent.com/85208391/125023230-398f1680-e0a0-11eb-8d2a-5b10d9987ec9.png)
 
+С конфигурационных содержанием
+```
+terraform {
+  backend "s3" {
+    endpoint = "storage.yandexcloud.net"
+    bucket   = "zagretdinov-d-infra-terraform"
+    region   = "ru-central1"
+    key      = "prod/terraform.tfstate"
+
+    skip_region_validation      = true
+    skip_credentials_validation = true
+  }
+}
+
+```
+![изображение](https://user-images.githubusercontent.com/85208391/125023334-7ce98500-e0a0-11eb-9212-d636cac7da96.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/125023340-84a92980-e0a0-11eb-9d45-cae64998ce90.png)
 
 
 
