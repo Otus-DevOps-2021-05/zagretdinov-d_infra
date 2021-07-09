@@ -5,10 +5,11 @@ variable app_disk_image {
   description = "Disk image for reddit app"
   default = "reddit-app-base"
 }
+
 variable subnet_id {
-<<<<<<< HEAD
 description = "Subnets for modules"
 }
+
 variable db_host {
   description = "Database host"
   default = "127.0.0.1"
@@ -21,7 +22,4 @@ variable db_port {
 
 variable private_key_path {
   description = "Path to the private key used for ssh access"
-=======
-  description = "Subnets for modules"
->>>>>>> af3cc805d08d599d9f449d475bc1172a814d83f9
 }

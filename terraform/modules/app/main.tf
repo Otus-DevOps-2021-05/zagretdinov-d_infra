@@ -1,22 +1,14 @@
-resource "yandex_compute_instance" "app" {
-<<<<<<< HEAD
+esource "yandex_compute_instance" "app" {
 name = "reddit-app"
-=======
-  name = "reddit-app"
-
->>>>>>> af3cc805d08d599d9f449d475bc1172a814d83f9
   labels = {
     tags = "reddit-app"
   }
+
   resources {
     cores  = 2
     memory = 2
-<<<<<<< HEAD
     core_fraction = 5
-=======
->>>>>>> af3cc805d08d599d9f449d475bc1172a814d83f9
-  }
-
+}
   boot_disk {
     initialize_params {
       image_id = var.app_disk_image
@@ -24,18 +16,13 @@ name = "reddit-app"
   }
 
   network_interface {
-<<<<<<< HEAD
   subnet_id = var.subnet_id
-=======
-    subnet_id = var.subnet_id
->>>>>>> af3cc805d08d599d9f449d475bc1172a814d83f9
-    nat = true
+  nat = true
   }
-
   metadata = {
-<<<<<<< HEAD
   ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
+
   connection {
       type        = "ssh"
       host        = self.network_interface.0.nat_ip_address
@@ -57,8 +44,3 @@ name = "reddit-app"
      script = "../modules/app/files/deploy.sh"
    }
  }
-=======
-    ssh-keys = "ubuntu:${file(var.public_key_path)}"
-  }
-}
->>>>>>> af3cc805d08d599d9f449d475bc1172a814d83f9
