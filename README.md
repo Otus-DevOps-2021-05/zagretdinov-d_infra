@@ -42,10 +42,6 @@ terraform apply
 
 ![изображение](https://user-images.githubusercontent.com/85208391/125016249-d77be480-e092-11eb-8b6b-ad24f13994ff.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/125016327-fda18480-e092-11eb-8152-9de28739c289.png)
-
-![изображение](https://user-images.githubusercontent.com/85208391/125016347-07c38300-e093-11eb-95af-932033002391.png)
-
 ![изображение](https://user-images.githubusercontent.com/85208391/125016367-11e58180-e093-11eb-92e1-b696d7b435f2.png)
 
 В результате:
