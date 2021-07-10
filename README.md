@@ -3,182 +3,115 @@ zagretdinov-d Infra repository
 
 ## Домашнее задание
 
-## Декларативное описание в виде кода инфраструктуры YC, требуемой для запуска тестового приложения, при помощи Terraform.
+## Управление конфигурацией.Основные DevOps инструменты. Знакомство с Ansible
 
+План
+Установка Ansible
+Знакомство с базовыми функциями и инвентори
+Выполнение различных модулей на подготовленной в прошлых ДЗ
+инфраструктуре
+Пишем простой плейбук
 
-## Установка Terraform
-Скаченная версия перемещена в папку bin.
+## Начало
+Создал новую ветку ansible-1.
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372688-03bbed80-dcae-11eb-9fe1-06f1e705c1ee.png)
+## Ansible, установка и настройка клиента
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372699-16cebd80-dcae-11eb-8edc-2e645151a89f.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125161653-624d0400-e1a5-11eb-9caf-f42d824297da.png)
 
-Создаю новую ветку ``` git checkout -b terraform - 1 ```
+![изображение](https://user-images.githubusercontent.com/85208391/125161661-6842e500-e1a5-11eb-96a2-71e54b887720.png)
 
-В корне репозитория создаю файл с содержимым
+![изображение](https://user-images.githubusercontent.com/85208391/125161663-6b3dd580-e1a5-11eb-9576-5d17de8b2f51.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372768-b12f0100-dcae-11eb-8006-9c79e71351af.png)
 
-создаю главный конфигурационныйфайл файл: main.tf
-определяю  секцию  Provider, ресурсы и интерфейс.
+## Запуск Vms
 
-![изображение](https://user-images.githubusercontent.com/85208391/124373323-3caa9100-dcb3-11eb-8954-cf0879ad35ce.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125161673-78f35b00-e1a5-11eb-9dc1-2fb1b52a204c.png)
 
+## Inventory file
 
-создаю отдельный service account
+![изображение](https://user-images.githubusercontent.com/85208391/125161682-84468680-e1a5-11eb-969e-0f33957f63a6.png)
 
-```
-yc config list
-$ SVC_ACCT=""
-$ FOLDER_ID=""
-$ yc iam service-account create --name $SVC_ACCT --folder-id $FOLDER_ID
-$ ACCT_ID=$(yc iam service-account get $SVC_ACCT | \ 
-grep ^id | \ 
-awk '{print $2}')
-$ yc resource-manager folder add-access-binding --id $FOLDER_ID \ 
---role editor \ 
---service-account-id $ACCT_ID
-yc iam key create --service-account-id $ACCT_ID --output <вставьтесвойпуть>/key.jcon
-```
+![изображение](https://user-images.githubusercontent.com/85208391/125161687-8ad4fe00-e1a5-11eb-8e74-bfb9470cb5b0.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372853-6feb2100-dcaf-11eb-8c77-5b34bdadca81.png)
+## Повторим для инстанса БД
 
-## Terraform initTerrafo
+![изображение](https://user-images.githubusercontent.com/85208391/125161700-9cb6a100-e1a5-11eb-9995-4331efd35b2a.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372893-af197200-dcaf-11eb-87f0-bb5dcd5494e0.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125161704-a2ac8200-e1a5-11eb-985e-085f3be4e965.png)
 
-## Ресурсная модель
-В файле main.tf после определения провайдера, добавляю ресурс для создания инстанса VM в YC и проверяю
-```
-terraform init
-terraform plan
-terraform apply
-```
+## Параметры ansible.cfg
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372926-0cadbe80-dcb0-11eb-9622-47e8a49f3f95.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125161710-a9d39000-e1a5-11eb-80ee-626add85f7d4.png)
 
+Изменим инвентори
 
-VM создана успешна.
+![изображение](https://user-images.githubusercontent.com/85208391/125161725-b7891580-e1a5-11eb-8c71-ff2033020ddb.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372936-1afbda80-dcb0-11eb-9f14-8934df1db85e.png)
+Проверим работу
 
+![изображение](https://user-images.githubusercontent.com/85208391/125161737-c53e9b00-e1a5-11eb-8bde-5bbef49d24c7.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372938-1fc08e80-dcb0-11eb-8aae-d8cd481b2bbb.png)
 
-## terraform show
-```
-terraform show | grep nat_ip_address
-nat_ip_address     = "178.154.229.124"
-```
+## Работа с группами хостов
 
-Добавим SSH ключ для пользователя ubuntu
+![изображение](https://user-images.githubusercontent.com/85208391/125161748-d5567a80-e1a5-11eb-9851-7a98443ba6fd.png)
 
-подключаемся
-ssh ubuntu@178.154.229.124
+![изображение](https://user-images.githubusercontent.com/85208391/125161751-d9829800-e1a5-11eb-880d-78d74f978ce1.png)
 
+## Использование YAML inventory
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372958-441c6b00-dcb0-11eb-864b-6d79ab303882.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125161753-e7381d80-e1a5-11eb-8968-fc22a0fb6666.png)
 
-подключение успешно.
+![изображение](https://user-images.githubusercontent.com/85208391/125161755-ebfcd180-e1a5-11eb-9133-f44b1cda89df.png)
 
-## Output vars
+## Выполнение команд
 
-создаю отдельный файлик с конфигурациями, с названием outputs.tf
+Проверим, что на app сервере установлены компоненты для работы
+приложения ( ruby и bundler ):
 
-![изображение](https://user-images.githubusercontent.com/85208391/124372983-7928bd80-dcb0-11eb-8a2a-a5e6b6934f61.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125161770-ffa83800-e1a5-11eb-9e98-efdbbe11093a.png)
 
+В то же время модуль shell успешно отработает:
 
-Используя следующие команды можно просмотреть выходнык переменные
+![изображение](https://user-images.githubusercontent.com/85208391/125161773-08007300-e1a6-11eb-9467-8d5860692aa8.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124373045-ffdd9a80-dcb0-11eb-9fef-724216297bef.png)
+Модуль command выполняет команды, не используя оболочку ( sh, bash ), поэтому в нем не работают перенаправления потоков и нет доступа к некоторым переменным окружения.
 
 
-## Добавляю provisioners
+Проверим на хосте с БД статус сервиса MongoDB с помощью модуля command или shell . (Эта операция аналогична запуску на хосте команды systemctl status mongod ):
 
-![изображение](https://user-images.githubusercontent.com/85208391/124373058-197ee200-dcb1-11eb-8a86-677f20d71c58.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125161810-4ac24b00-e1a6-11eb-9dd7-8f31fd895b01.png)
 
-создаю файлы с содержимым в папке files
 
-![изображение](https://user-images.githubusercontent.com/85208391/124373064-27ccfe00-dcb1-11eb-879b-9050ffa8360b.png)
+А можем выполнить ту же операцию используя модуль systemd, который предназначен для управления сервисами:
 
-![изображение](https://user-images.githubusercontent.com/85208391/124373066-2bf91b80-dcb1-11eb-9f54-d73c629f767a.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125161834-64fc2900-e1a6-11eb-8f5e-8678138ec753.png)
 
+Или еще лучше с помощью модуля service , который более универсален и будет работать и в более старых ОС с init.d-инициализацией:
 
-## Параметр подключение provisioners
+![изображение](https://user-images.githubusercontent.com/85208391/125161845-72191800-e1a6-11eb-9c98-05e18dd13a0d.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124373083-46cb9000-dcb1-11eb-9103-d8a2f2102382.png)
 
-## Проверяем работу провижинеровПроверяем работу провижи
+Используем модуль git для клонирования репозитория с приложением на app сервер:
 
-```
-terraform taint yandex_compute_instance.app[0]
-Resource instance yandex_compute_instance.app[0] has been marked as tainted.
-terraform plan
-terraform apply
-```
+![изображение](https://user-images.githubusercontent.com/85208391/125161849-7e9d7080-e1a6-11eb-9624-3945ae385492.png)
 
-Проверяю работу приложения
 
-external_ip_address_app = 84.201.129.118
+И попробуем сделать то же самое с модулем command:
 
+![изображение](https://user-images.githubusercontent.com/85208391/125161859-8f4de680-e1a6-11eb-86b1-75da89c3d802.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124373105-6c589980-dcb1-11eb-90e0-1cfa284634ba.png)
+в результате ошибка.
 
+## Напишем простой плейбу
+Реализуем простой плейбук, который выполняет аналогичные предыдущему слайду действия (клонирование репозитория).
 
-## Input vars
-Для использования входных переменных создаю следующие конфигурационные файлы.
+![изображение](https://user-images.githubusercontent.com/85208391/125161877-b5738680-e1a6-11eb-8b67-23dfe094a13f.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124373155-a0cc5580-dcb1-11eb-9cf5-6478907a19ac.png)
+![изображение](https://user-images.githubusercontent.com/85208391/125161886-c3290c00-e1a6-11eb-80f8-ce2ba5123daa.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/124373158-a75acd00-dcb1-11eb-97af-245c82373730.png)
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373160-aaee5400-dcb1-11eb-9b3a-94164e2961c6.png)
-
-## Финальная проверка
-
-Пересоздаю все ресурсы 
-```
-terraform destroy
-terraform plan
-terraform apply
-```
-![изображение](https://user-images.githubusercontent.com/85208391/124373213-25b76f00-dcb2-11eb-9926-0d5de6caf110.png)
-
-external_ip_address_app = 178.154.228.93
-
-http://178.154.228.93:9292/
-
-![изображение](https://user-images.githubusercontent.com/85208391/124373237-5f887580-dcb2-11eb-8142-5eb12ad9f097.png)
-
-
-## Самостоятельные задания
-Создал файл lb.tf и описал в нем в коде terraform создание HTTP балансировщика, направляющего трафик на нашеразвернутое приложение на инстансе reddit-app.  Добави в output переменные адрес балансировщика
-
-![изображение](https://user-images.githubusercontent.com/85208391/124374974-358a7f80-dcc1-11eb-92ef-9a1cbe25bd6c.png)
-
-![изображение](https://user-images.githubusercontent.com/85208391/124375936-6620e800-dcc6-11eb-9738-562720d2b93e.png)
-
-
-Проверил доступность приложения по адресу балансировщика.
-
-![изображение](https://user-images.githubusercontent.com/85208391/124375947-75a03100-dcc6-11eb-8235-76a982c99551.png)
-
-Это адресс является
-
-external_ip_address_lb = 178.154.227.41
-
-
-
-
-
-
-
-
-
-
-
-
-
+выполню ansible ```app -m command -a 'rm -rf ~/reddit'```
 
 
 
