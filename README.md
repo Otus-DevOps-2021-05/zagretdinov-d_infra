@@ -118,6 +118,21 @@ zagretdinov-d Infra repository
 
 ![изображение](https://user-images.githubusercontent.com/85208391/125162205-6e869080-e1a8-11eb-8521-4ff6c0e4390f.png)
 
+Ответ: произошли изменения в репозитории так как командой rm -rf ~/reddit удалили.
+
+## Задание со ⭐
+
+Создаем файл inventory.json c содержимым
+
+![изображение](https://user-images.githubusercontent.com/85208391/125162376-477c8e80-e1a9-11eb-88d0-8b75d4060c4c.png)
+
+
+Проверяю:
+
+![изображение](https://user-images.githubusercontent.com/85208391/125162425-87dc0c80-e1a9-11eb-8410-058bdfab748d.png)
+
+
+
 
 
 
