@@ -111,8 +111,12 @@ zagretdinov-d Infra repository
 
 ![изображение](https://user-images.githubusercontent.com/85208391/125161886-c3290c00-e1a6-11eb-80f8-ce2ba5123daa.png)
 
-выполню ansible ```app -m command -a 'rm -rf ~/reddit'```
+Выполню ansible ```app -m command -a 'rm -rf ~/reddit'```
+в рзультате:
 
+![изображение](https://user-images.githubusercontent.com/85208391/125162006-6d089880-e1a7-11eb-9067-4a885aa12212.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/125162205-6e869080-e1a8-11eb-8521-4ff6c0e4390f.png)
 
 
 
