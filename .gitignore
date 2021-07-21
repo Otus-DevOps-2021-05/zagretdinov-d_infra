@@ -1,5 +1,6 @@
 /packer/key.json
 /packer/variables.json
+*.retry
 *.tfstate
 *.tfstate.*.backup
 *.tfstate.backup
