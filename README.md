@@ -218,15 +218,87 @@ ansible-playbook reddit_app2.yml --tags deploy-tag
 
 ![изображение](https://user-images.githubusercontent.com/85208391/126543661-d916953b-6150-4606-ada0-657c03964784.png)
 
+## Несколько плейбуков
+
+Создал три файла:
+
+    app.yml
+    db.yml
+    deploy.yml
+
+Перенес туда код из reddit_app2.yml, удалив теги
+
+Переименовал предыдущие плейбуки:
+
+    reddit_app.yml -> reddit_app_one_play.yml
+    reddit_app2.yml -> reddit_app_multiple_plays.yml
+
+Создал файл site.yml:
+
+![изображение](https://user-images.githubusercontent.com/85208391/126544850-2a2e0fcf-6b30-496f-9259-fdca06df875d.png)
+
+Применил плейбук
+
+ansible-playbook site.yml --check
+ansible-playbook site.yml
+
+![изображение](https://user-images.githubusercontent.com/85208391/126545016-06f765e8-73b0-485c-b326-c909da232c44.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126545049-67d5d4d6-cdc5-49ca-a2e0-65ed30ae26c8.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126545093-841e5f17-799e-4599-a9a9-441dcb1497fd.png)
+
+## Задание со ⭐
+
+Динамический инвентарь отражен в ansible.cfg и плейбуках
+
+## Провижининг в Packer
+
+Создаю плейбуки ansible/packer_app.yml и ansible/packer_db.yml.
+И так packer_app.yml - устанавливает Ruby и Bundler и скрипт выглядит следующим образом
+
+![изображение](https://user-images.githubusercontent.com/85208391/126546077-ec917d8a-9b8a-4853-8cc6-336166a98b64.png)
+
+Интегрируем Ansible в Packer
+
+![изображение](https://user-images.githubusercontent.com/85208391/126546189-d25586fb-0b2e-45aa-a887-7f84992aa252.png)
+
+Выполняю билд app.json.
+
+![изображение](https://user-images.githubusercontent.com/85208391/126546326-52ecef26-038f-4fe7-acad-1b6e3b53a8f2.png)
+
+Как видно успешно создался  образ reddit-app1  как я и хотел.
+
+Создаю теперь ansible/packer_db.yml.
+
+Packer_db.yml - добавляет репозиторий MongoDB, устанавливает ее и включает сервис.
+
+![изображение](https://user-images.githubusercontent.com/85208391/126546509-59e8b42e-46fe-4f66-bfc1-8adda6d922ce.png)
+
+Интегрирую Ansible в Packer
+
+![изображение](https://user-images.githubusercontent.com/85208391/126546702-337da750-e489-4dc5-9281-593f0f59758f.png)
+
+Итого:
+
+![изображение](https://user-images.githubusercontent.com/85208391/126546757-537d66c6-901f-4ee3-8bbb-a6ec9e143c12.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126546806-45352866-8db0-4b55-9e07-71578adbacf9.png)
+
+итого создан успешно образ reddit-db1.
+
+На основе созданных app и db образов настраиваю и запускаю stage окружение.
+
+![изображение](https://user-images.githubusercontent.com/85208391/126546993-c62f31cc-e456-42bb-8ed6-333c94c23e64.png)
+
+Проверяю, что c помощью плейбука site.yml из предыдущего раздела окружение конфигурируется, а приложение деплоится и работает.
+
+![изображение](https://user-images.githubusercontent.com/85208391/126547256-8fba5b80-6a16-4f1b-901c-5c6de171097b.png)
 
 
+Проверка! Все работает
 
-
-
-
-
-
-
+![изображение](https://user-images.githubusercontent.com/85208391/126547352-91be05b7-ee52-4fea-abf4-e9f787cf2da9.png)
 
 
 
