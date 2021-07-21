@@ -38,11 +38,26 @@ ansible-playbook reddit_app.yml --limit db --tags db-tag
 ```
 ![изображение](https://user-images.githubusercontent.com/85208391/126525473-afd15b7b-d0ee-4add-a610-c8190e14464b.png)
 
+Добавил файл files/puma.service:
 
+![изображение](https://user-images.githubusercontent.com/85208391/126528666-aa2b6a92-6600-45cf-8cd3-43f7946b67f4.png)
 
+Добавил шаблон templates/mongod.conf.j2, в который будет подставляться адрес db_host:
 
+![изображение](https://user-images.githubusercontent.com/85208391/126529949-ff30a6d9-7969-46fa-96d3-1f99605db13d.png)
 
+Добавил таски и хендлер для app:
 
+![изображение](https://user-images.githubusercontent.com/85208391/126530630-06a1ca1c-f35b-49ac-87b6-b3262225edd1.png)
+
+Запустил пробный прогон и применил плейбук:
+
+```
+ansible-playbook reddit_app.yml --check --limit app --tags app-tag
+ansible-playbook reddit_app.yml --limit app --tags app-tag
+```
+
+![изображение](https://user-images.githubusercontent.com/85208391/126531682-7f53109e-db78-43d4-8aba-3be34ac74167.png)
 
 
 
