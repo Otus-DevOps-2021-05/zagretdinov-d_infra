@@ -60,6 +60,176 @@ ansible-playbook reddit_app.yml --limit app --tags app-tag
 ![изображение](https://user-images.githubusercontent.com/85208391/126531682-7f53109e-db78-43d4-8aba-3be34ac74167.png)
 
 
+## Настройка инстанса приложения
+Добавил  в сценарии  таск  для  копирования  unit-файла
+```
+  tasks:
+    - name: Add unit file for Puma
+      copy:
+        src: files/puma.service
+        dest: /etc/systemd/system/puma.service
+      notify: reload puma
+      
+   - name: enable puma
+      become: true
+      systemd: name=puma enabled=yes
+      tags: app-tag
+```  
+добавил новый handler
+
+```
+handlers: #Добавим блок handlers и задачу
+    - name: restart mongod
+      become: true
+      service: name=mongod state=restarted
+
+    - name: reload puma
+      become: true
+      systemd: name=puma state=restarted
+```
+![изображение](https://user-images.githubusercontent.com/85208391/126535924-136295ef-044d-4457-a4d7-a58c63057200.png)
+
+
+![изображение](https://user-images.githubusercontent.com/85208391/126536113-741c2922-3249-4ea7-8815-2527db67a4c6.png)
+
+
+![изображение](https://user-images.githubusercontent.com/85208391/126536147-86626039-78e6-4a3f-be40-6fc94ea49a10.png)
+
+
+## Деплой
+Добавил еще несколько тасков в сценарий плейбука.
+```
+  - name: Fetch the latest version of application code
+      git:
+        repo: 'https://github.com/express42/reddit.git'
+        dest: /home/ubuntu/reddit
+        version: monolith #Указываемнужнуюветку
+      tags: deploy-tag
+      notify: reload puma
+
+    - name: Bundle install
+      bundler:
+        state: present
+        chdir: /home/ubuntu/reddit
+      tags: deploy-tag
+```
+Выполняю деплой
+![изображение](https://user-images.githubusercontent.com/85208391/126538193-1be8c3a1-b5ea-4ebb-a4c2-d7ced26b0aa0.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126538255-878cde30-d257-4aa9-9161-f7161802fc09.png)
+
+## Один плейбук,несколько сценариев.
+Скопировал все что касается db в отдельный файл - reddit_app2.yml, при это поправил описание, унес become и tags на уровень выше, поменял hosts.
+Для DB
+```
+---
+- name: Configure MongoDB
+  hosts: db
+  tags: db-tag
+  become: true
+  vars:
+    mongo_bind_ip: 0.0.0.0
+  tasks:
+    - name: Change mongo config file
+      template:
+        src: templates/mongod.conf.j2
+        dest: /etc/mongod.conf
+        mode: 0644
+      notify: restart mongod
+  handlers:
+  - name: restart mongod
+    service: name=mongod state=restarted
+```
+Для App
+```
+- name: Configure App
+  hosts: app
+  tags: app-tag
+  become: true
+  vars:
+   db_host: 192.168.10.4
+  tasks:
+    - name: Add unit file for Puma
+      copy:
+        src: files/puma.service
+        dest: /etc/systemd/system/puma.service
+      notify: reload puma
+    - name: Add config for DB connection
+      template:
+        src: templates/db_config.j2
+        dest: /home/ubuntu/db_config
+        owner: ubuntu
+        group: ubuntu
+    - name: enable puma
+      systemd: name=puma enabled=yes
+  handlers:
+  - name: reload puma
+    systemd: name=puma state=restarted
+```
+Для Deploy
+```
+- name: Deploy App
+  hosts: app
+  tags: deploy-tag
+  become: true
+  tasks:
+    - name: Fetch the latest version of application code
+      git:
+        repo: 'https://github.com/express42/reddit.git'
+        dest: /home/ubuntu/reddit
+        version: monolith
+      notify: restart puma
+
+    - name: bundle install
+      bundler:
+        state: present
+        chdir: /home/ubuntu/reddit
+
+  handlers:
+  - name: restart puma
+    become: true
+    systemd: name=puma state=restarted
+```
+Для чистоты проверки наших плейбуков пересоздадим инфраструктуруокружения stage, используя команды:
+```
+$ terraform destroy
+$ terraform apply -auto-approve=false
+```
+
+
+Применил изменения:
+```
+ansible-playbook reddit_app2.yml --check --tags db-tag
+ansible-playbook reddit_app2.yml --tags db-tag
+
+ansible-playbook reddit_app2.yml --check --tags app-tag
+ansible-playbook reddit_app2.yml --tags app-tag
+
+ansible-playbook reddit_app2.yml --check --tags deploy-tag
+ansible-playbook reddit_app2.yml --tags deploy-tag
+```
+
+
+![изображение](https://user-images.githubusercontent.com/85208391/126541047-f2250b7e-fedb-43b6-83f8-9f30aed411f4.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126541090-f479cdcd-0638-4304-9f7e-e707ec33b12b.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126541142-580ddab4-f2a8-44d3-92a4-e076894ce5d5.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126543661-d916953b-6150-4606-ada0-657c03964784.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
