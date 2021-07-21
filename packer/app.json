@@ -9,17 +9,17 @@
             "use_ipv4_nat": true,
 
             "source_image_family": "ubuntu-1604-lts",
-            "image_name": "reddit-app",
-            "image_family": "reddit-app",
+            "image_name": "reddit-app1",
+            "image_family": "reddit-app1",
             "ssh_username": "ubuntu",
             "platform_id": "standard-v2"
         }
     ],
-    "provisioners": [
-        {
-            "type": "shell",
-            "script": "scripts/install_ruby.sh",
-            "execute_command": "sudo {{.Path}}"
-        }
-    ]
+
+"provisioners": [
+         {
+             "type": "ansible",
+             "playbook_file": "ansible/packer_app.yml"
+             }
+       ]
 }

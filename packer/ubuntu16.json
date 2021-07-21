@@ -2,8 +2,8 @@
     "builders": [
         {
             "type": "yandex",
-            "service_account_key_file": "{{user `key_file`}}",
-            "folder_id": "{{user `folder_id`}}",
+            "service_account_key_file": "key.json",
+            "folder_id": "b1gqcm35q1r42848vrgi",
             "zone": "ru-central1-a",
             "subnet_id": "{{user `subnet_id`}}",
             "use_ipv4_nat": true,
