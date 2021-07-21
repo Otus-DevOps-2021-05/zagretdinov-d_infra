@@ -5,9 +5,9 @@ zagretdinov-d Infra repository
 
 ## Деплой и управление конфигурацией сконфигурацией с Ansible
 
-Создаю новую ветку называю ansible-2.
+Создаю новую ветку, называю ansible-2.
 
-комментирую код провижининга для app и db модулей.
+Комментирую код провижининга для app и db модулей.
 
 ![изображение](https://user-images.githubusercontent.com/85208391/126520118-a2f606b2-88b7-4cb2-ba73-030eb0f915f1.png)
 
@@ -17,6 +17,47 @@ zagretdinov-d Infra repository
 Создал плейбук reddit_app.yml:
 
 ![изображение](https://user-images.githubusercontent.com/85208391/126521499-b514e4b3-2483-444e-aabc-ce8c5655ecbb.png)
+
+
+Добавил шаблон для mongodb templates/mongod.conf.j2
+
+![изображение](https://user-images.githubusercontent.com/85208391/126522916-945045e6-afa3-4a5a-b8a1-1add723fffc6.png)
+
+Задал переменную:
+```
+vars: 
+   mongo_bind_ip: 0.0.0.0
+```
+## Пробный прогон
+--check пробный прогон
+--limit выполняет плейбук только для переданных хостов
+--tags выполняет таски с переданными тегами
+  ```
+ansible-playbook reddit_app.yml --check --limit db --tags db-tag
+ansible-playbook reddit_app.yml --limit db --tags db-tag
+```
+![изображение](https://user-images.githubusercontent.com/85208391/126525473-afd15b7b-d0ee-4add-a610-c8190e14464b.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
