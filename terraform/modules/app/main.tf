@@ -30,17 +30,17 @@ name = "reddit-app"
       agent       = false
       private_key = file(var.private_key_path)
     }
-    provisioner "file" {
-    content     = "DATABASE_URL=${var.db_host}:${var.db_port}\n"
-    destination = "/home/ubuntu/db.env"
-  }
-
-  provisioner "file" {
-     source      = "../modules/app/files/puma.service"
-     destination = "/tmp/puma.service"
-   }
-
-   provisioner "remote-exec" {
-     script = "../modules/app/files/deploy.sh"
-   }
+#    provisioner "file" {
+#    content     = "DATABASE_URL=${var.db_host}:${var.db_port}\n"
+#    destination = "/home/ubuntu/db.env"
+#  }
+#
+#  provisioner "file" {
+#     source      = "../modules/app/files/puma.service"
+#     destination = "/tmp/puma.service"
+#   }
+#
+#   provisioner "remote-exec" {
+#     script = "../modules/app/files/deploy.sh"
+#   }
  }
