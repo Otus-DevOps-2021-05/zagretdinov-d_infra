@@ -168,10 +168,6 @@ ansible-galaxy install -r environments/stage/requirements.yml
 
 ![изображение](https://user-images.githubusercontent.com/85208391/126914428-62d2f9ab-377b-46c7-a2b9-135a56ca63c4.png)
 
-![изображение](https://user-images.githubusercontent.com/85208391/126914437-4ce528c0-a8bb-455f-a20d-00416056c195.png)
-
-![изображение](https://user-images.githubusercontent.com/85208391/126914440-2413c55b-8554-4d15-b9cb-d9c1e040d46c.png)
-
 Коммьюнити-роли не стоит коммитить в свой репозиторий, поэтому добавил исклюение в .gitignore
 
 jdauphant.nginx
@@ -201,6 +197,70 @@ resource "google_compute_firewall" "firewall_puma" {
 }
 ```
 Добавил вызов роли jdauphant.nginx в плейбук app.yml
+
+## Работа с Ansible Vaul
+
+Для безопасной работы с приватными данными (пароли, приватные ключи и т.д.) используется механизм Ansible Vault. Данные сохраняются в зашифрованных файлах, которые при выполнении плейбука автоматически расшифровываются. Таким образом, приватные данные можно хранить в системе контроля версий.
+
+Для шифрования используется мастер-пароль (aka vault key). Его нужно передавать команде ansible-playbook при запуске, либо указать файл с ключом в ansible.cfg. Не допускайте хранения этого ключ-файла в Git! Используйте для разных окружений разный vault key.
+
+Подготовим плейбук для создания пользователей, пароль пользователей будем хранить в зашифрованном виде в файле credentials.yml:
+
+- Создал файл vault.key с произвольной строкой ключа
+- В ansible.cfg добавил vault_password_file = vault.key
+- Добавил vault.key в .gitignore
+
+Создал playbooks/users.yml:
+```
+---
+- name: Create users
+  hosts: all
+  become: true
+
+  vars_files:
+    - "{{ inventory_dir }}/credentials.yml"
+
+  tasks:
+    - name: create users
+      user:
+        name: "{{ item.key }}"
+        password: "{{ item.value.password|password_hash('sha512', 65534|random(seed=inventory_hostname)|string) }}"
+        groups: "{{ item.value.groups | default(omit) }}"
+      with_dict: "{{ credentials.users }}"
+```
+Создал ansible/environments/prod/credentials.yml:
+```
+credentials:
+  users:
+    admin:
+      password: admin123
+      groups: sudo
+```
+Создал ansible/environments/stage/credentials.yml:
+```
+credentials:
+  users:
+    admin:
+      password: qwerty123
+      groups: sudo
+    qauser:
+      password: test123
+```
+Зашифровал файлы используя vault.key
+
+![изображение](https://user-images.githubusercontent.com/85208391/126915066-c29385fe-47ae-41b5-a440-12595f1d4890.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126915067-36a739e8-64bb-4f75-ba33-3b08872137c0.png)
+
+
+
+
+
+
+
+
+
+
 
 
 
