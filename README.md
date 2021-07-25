@@ -44,11 +44,115 @@ app
   become: true
 
   vars:
-    db_host: 10.132.0.2
+    db_host: 192.168.10.6
 
   roles:
     - app
 ```
+## Проверка ролей
+
+Пересоздаю инфра структуру.
+```
+$ terraform destroy
+$ terraform apply -auto-approve=false
+```
+![изображение](https://user-images.githubusercontent.com/85208391/126911458-78e69867-2e9f-4e58-b7c1-50449d0a377a.png)
+
+$ ansible-playbook site.yml --check
+$ ansible-playbook site.yml
+
+![изображение](https://user-images.githubusercontent.com/85208391/126912639-fec6c75e-d347-4088-8835-f7e74dffbad2.png)
+
+Проверяю работу приложения
+
+
+![изображение](https://user-images.githubusercontent.com/85208391/126912745-78cbcfef-48db-4163-a522-b36dac6dac6f.png)
+
+## Окружения
+
+Создал папки
+```
+ansible/environments
+ansible/environments/prod
+ansible/environments/stage
+```
+
+Положил в prod и stage файл inventory, из корневой папки ansible удалил inventory.
+
+Теперь, когда у нас два инвентори файла, то чтобы управлять хостами окружения нам необходимо явно передавать команде, какой инвентори мы хотим использовать. Например, чтобы задеплоить приложение на prod окружении мы должны теперь написать:
+
+ansible-playbook -i environments/prod/inventory deploy.yml
+
+Определил окружение по умолчанию в ansible.cfg
+
+inventory = ./environments/stage/inventory # Inventory по-умолчанию задается здесь
+
+Директория group_vars, созданная в директории плейбука или инвентори файла, позволяет создавать файлы (имена, которых должны соответствовать названиям групп в инвентори файле) для определения переменных для группы хостов.
+
+Создал директорию group_vars в environments/prod и environments/stage.
+
+Создал в stage/group_vars/all:
+
+env: stage
+
+Создал в stage/group_vars/app:
+
+db_host: 10.132.0.2
+
+Создал в stage/group_vars/db:
+
+mongo_bind_ip: 0.0.0.0
+
+Для prod все аналогично, только в group_vars/all:
+
+env: prod
+
+В roles/app/defaults/main.yml и roles/db/defaults/main.yml добавил:
+
+env: local
+
+Добавил в roles/app/tasks/main.yml и roles/db/tasks/main.yml таск выводящий текущее окружение:
+
+```
+- name: Show info about the env this host belongs to
+  debug:
+    msg: "This host is in {{ env }} environment!!!"
+```
+
+Навел порядок в директории ansible
+
+Перенес плейбуки в папку playbooks
+Перенес files, templates, inventory.sh и inventory.yml в папку old
+
+Улучшил ansible.cfg
+```
+[defaults]
+inventory = ./environments/stage/inventory
+remote_user = ubuntu
+private_key_file = ~/.ssh/zagretdinov
+host_key_checking = False
+retry_files_enabled = False
+roles_path = ./roles
+vault_password_file = ~/.ansible/vault.key
+
+[diff]
+always = True
+context = 5
+```
+## Настройка stage окружения
+
+![изображение](https://user-images.githubusercontent.com/85208391/126913497-c71108dc-ffa0-4453-b013-da00e576434c.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126913515-8478dc3a-71bf-46a5-bdef-60e804ec44a9.png)
+
+## Настройка Prod окружения
+
+![изображение](https://user-images.githubusercontent.com/85208391/126913622-8e09dfd5-6b73-4db2-9bf1-262ed4c5758b.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126913627-5d1eba47-c995-4566-877d-2110b5a480e2.png)
+
+
+
 
 
 
