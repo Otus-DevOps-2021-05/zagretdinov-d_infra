@@ -151,9 +151,56 @@ context = 5
 
 ![изображение](https://user-images.githubusercontent.com/85208391/126913627-5d1eba47-c995-4566-877d-2110b5a480e2.png)
 
+## Работа с community-ролями
 
+Коммьюнити-роли в основном находятся на портале Ansible Galaxy и работа с ними производится с помощью утилиты ansible-galaxy и файла requirements.yml
 
+Используем роль jdauphant.nginx и настроим обратное проксирование для нашего приложения с помощью nginx.
 
+Хорошей практикой считается разделение зависимостей ролей по окружениям. Создал файлы environments/stage/requirements.yml и environments/prod/requirements.yml, с содержимым:
+```
+- src: jdauphant.nginx
+  version: v2.21.1
+```
+Установил роль:
+
+ansible-galaxy install -r environments/stage/requirements.yml
+
+![изображение](https://user-images.githubusercontent.com/85208391/126914428-62d2f9ab-377b-46c7-a2b9-135a56ca63c4.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126914437-4ce528c0-a8bb-455f-a20d-00416056c195.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/126914440-2413c55b-8554-4d15-b9cb-d9c1e040d46c.png)
+
+Коммьюнити-роли не стоит коммитить в свой репозиторий, поэтому добавил исклюение в .gitignore
+
+jdauphant.nginx
+
+Добавил переменные для роли в stage/group_vars/app и prod/group_vars/app:
+```
+nginx_sites:
+  default:
+    - listen 80
+    - server_name "reddit"
+    - location / {
+        proxy_pass http://127.0.0.1:9292;
+      }
+```
+
+Добавил в terraform/modules/app/main.tf 80 порт:
+```
+resource "google_compute_firewall" "firewall_puma" {
+  name = "allow-puma-default"
+  network = "default"
+  allow {
+    protocol = "tcp"
+    ports = ["9292", "80"]
+  }
+  source_ranges = ["0.0.0.0/0"]
+  target_tags = ["reddit-app"]
+}
+```
+Добавил вызов роли jdauphant.nginx в плейбук app.yml
 
 
 
