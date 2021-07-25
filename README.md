@@ -252,8 +252,13 @@ credentials:
 
 ![изображение](https://user-images.githubusercontent.com/85208391/126915067-36a739e8-64bb-4f75-ba33-3b08872137c0.png)
 
+## Работа с Ansible Vault
 
+![изображение](https://user-images.githubusercontent.com/85208391/126915239-090ffda4-5b35-4baf-bef4-f64867abc2ed.png)
 
+![изображение](https://user-images.githubusercontent.com/85208391/126915242-8d470f38-10c5-4a47-a868-c532e94d4047.png)
+
+Все отработало.
 
 
 
