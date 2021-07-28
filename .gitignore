@@ -8,3 +8,5 @@
 .terraform/
 /terraform/prod/key.json
 /terraform/stage/key.json
+jdauphant.nginx
+/ansible/vault.key
