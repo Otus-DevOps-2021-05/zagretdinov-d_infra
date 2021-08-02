@@ -29,3 +29,37 @@ zagretdinov-d Infra repository
 Запуск ```vagrant provision dbserver```
 ![изображение](https://user-images.githubusercontent.com/85208391/127914772-7c99e5db-8f68-40c5-8597-749bee634fb6.png)
 
+Проверяю работу роли:
+
+![изображение](https://user-images.githubusercontent.com/85208391/127915764-76204696-6e2e-4bde-ba6d-bbb02af2d699.png)
+
+![изображение](https://user-images.githubusercontent.com/85208391/127915847-571b88bd-4734-4f46-b61c-66e10dffdee2.png)
+
+
+
+Аналогично поправил роль app, добавив туда установку зависимостей.
+
+Добавил провижин для appserver согласно задания и запустил:
+
+```vagrant provision appserver```
+
+![изображение](https://user-images.githubusercontent.com/85208391/127916424-14e60984-6a67-44b5-ae00-2dce713909bf.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
