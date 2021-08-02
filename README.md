@@ -17,6 +17,7 @@ zagretdinov-d Infra repository
 ![изображение](https://user-images.githubusercontent.com/85208391/127913908-ed6dc516-4a14-41b9-88aa-4202c8bd93bc.png)
 
 Проверил статус машин:
+
 ![изображение](https://user-images.githubusercontent.com/85208391/127913961-fe8d5604-61c1-4b04-851e-17bcfedaf7c9.png)
 
 Подключился по ssh на appserver и запустил ping.
