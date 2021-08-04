@@ -45,11 +45,38 @@ zagretdinov-d Infra repository
 
 ![изображение](https://user-images.githubusercontent.com/85208391/127916424-14e60984-6a67-44b5-ae00-2dce713909bf.png)
 
+## Проверка
 
+Потушил вируталки:
+```
+vagrant destroy -f
+```
+Запустил:
+```
+vagrant up
+```
+Проверил что приложение доступно по адресу 10.10.10.20:9292.
 
+![изображение](https://user-images.githubusercontent.com/85208391/128183341-2d4a56a6-7708-4d61-9f45-bf9b8e83cef4.png)
 
+## Задание со *
+В процессе был установлен nginx 
 
+![изображение](https://user-images.githubusercontent.com/85208391/128184945-f93d2bd7-2270-4665-9fec-b37233f6451c.png)
 
+## Задание
+
+Дополните конфигурацию Vagrant для корректной работы проксирования приложения с помощью nginx.
+
+Добавил в Vagrantfile в секцию extra_vars
+```
+ansible.extra_vars = {
+       "deploy_user" => "ubuntu",
+       nginx_sites: {
+          default: ["listen 80", "server_name 'puma'", "location / {proxy_pass http://127.0.0.1:9292;}"]
+     }
+```
+![изображение](https://user-images.githubusercontent.com/85208391/128185065-aac3c3c8-5854-4d82-a2db-a7240c34990d.png)
 
 
 
