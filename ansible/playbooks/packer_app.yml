@@ -1,14 +1,20 @@
 ---
-
-- name: Install ruby
+- name: Install Ruby && Bundler
   hosts: all
-  become: yes
-  tasks:
-    - name: Install required packages
-      apt:
-        update_cache: yes
-        name:
-          - git
-          - ruby-full
-          - ruby-bundler
-          - build-essential
+  become: true
+  roles:
+    - app
+
+
+#- name: Install ruby
+#  hosts: all
+#  become: yes
+#  tasks:
+#    - name: Install required packages
+#      apt:
+#        update_cache: yes
+#        name:
+#          - git
+#          - ruby-full
+#          - ruby-bundler
+#          - build-essential
